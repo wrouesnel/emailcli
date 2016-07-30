@@ -1,0 +1,14 @@
+language: go
+go:
+- '1.6'
+script:
+- make all
+deploy:
+  provider: releases
+  file: email
+  on:
+    tags: true
+    branch: master
+    repo: wrouesnel/emailcli
+  api_key:
+    secure: LwWC9VndftJuJjeonMk2JRxOg3u312CGybU7JcXeIjtDuLwGvNkK5zsHSRIX8+Oj4tfhEcTbdY2XHS9C0tiJ2EUklsMNZBRnEE+i56WW9GVgJc/mCmTZpN9j1ilNeHASjAYreJ71F7NeRc0rM4hy18LJQTbZEwN9JCLhqGfOc1e5vSNvVKZv7+6/4UHdKDSlVlmeEMNrLpS/QoTmSpGQyk0JxXVsK2ZW+va3huysKh913B3D4KNmtNMwdMsAAv/q3uvxlpGYG+QkGfKrF8qbgyoVJXsNc//ibbGNtPDOdk/MZv/d2KD4VgKpL8wvb75IbAG4LkvM3WDDcNTEOviECKDREJfZDCczah2RLKn+6Mev8uWpcnS4rs3uHD/7pQUuZb5nTtXgBOfLSLtl/rfs8nrzCyEN9j+JJ7Qc+Kyi1anjAuqZDw+0aD0xc1VXda0vUdYpJWt21dOAQtJw0BuibgqTJeE3m6s7LDkUssrd5ih5QI2mr3mSWJ0faUvRc8FeSun4MvolurvP1rYhNIr9BJm6E1l9pKUfMRncPsuIX5Rdzxu1+vfM5EhbIT5quBSUtVkGUzhDcr223wGbOKGDLiLTO8eBkLGU5HHRzqcAb0BEi4ppKQzd+pvQ32Rx+Hww7KwPbexln46iD1OkHrxz96AzB/B6RFuSX5vxy7zmFMY=
