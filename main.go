@@ -31,7 +31,11 @@ var (
 	poolsize = kingpin.Flag("concurrent-sends", "Max concurrent email send jobs").Envar("EMAIL_CONCURRENT_SENDS").Default("1").Int()
 )
 
+var Version = "0.0.0-dev"
+
 func main() {
+	kingpin.CommandLine.HelpFlag.Short('h')
+	kingpin.Version(Version)
 	kingpin.Parse()
 
 	if *timeout == 0 {
