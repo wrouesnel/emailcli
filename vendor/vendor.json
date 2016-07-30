@@ -1,0 +1,31 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"path": "github.com/alecthomas/template",
+			"revision": "14fd436dd20c3cc65242a9f396b61bfc8a3926fc",
+			"revisionTime": "2015-12-01T11:57:09+11:00"
+		},
+		{
+			"path": "github.com/alecthomas/template/parse",
+			"revision": "14fd436dd20c3cc65242a9f396b61bfc8a3926fc",
+			"revisionTime": "2015-12-01T11:57:09+11:00"
+		},
+		{
+			"path": "github.com/alecthomas/units",
+			"revision": "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a",
+			"revisionTime": "2015-10-22T17:55:26+11:00"
+		},
+		{
+			"path": "github.com/jordan-wright/email",
+			"revision": "fd703108daeb23d77c124d12978e9b6c4f28f034",
+			"revisionTime": "2016-04-03T12:25:29-05:00"
+		},
+		{
+			"path": "gopkg.in/alecthomas/kingpin.v2",
+			"revision": "8cccfa8eb2e3183254457fb1749b2667fbc364c7",
+			"revisionTime": "2016-02-17T20:03:01+11:00"
+		}
+	]
+}
