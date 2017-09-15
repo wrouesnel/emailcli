@@ -18,14 +18,20 @@
 			"revisionTime": "2015-10-22T17:55:26+11:00"
 		},
 		{
+			"checksumSHA1": "boZh0jRCaKxbm4gSlFtHXKhJnzQ=",
+			"origin": "github.com/wscherphof/email",
 			"path": "github.com/jordan-wright/email",
-			"revision": "fd703108daeb23d77c124d12978e9b6c4f28f034",
-			"revisionTime": "2016-04-03T12:25:29-05:00"
+			"revision": "9124007cf135287210253f8be092351b1208db62",
+			"revisionTime": "2017-06-12T23:20:21+02:00",
+			"tree": true,
+			"version": "TLS-Pool",
+			"versionExact": "TLS-Pool"
 		},
 		{
 			"path": "gopkg.in/alecthomas/kingpin.v2",
 			"revision": "8cccfa8eb2e3183254457fb1749b2667fbc364c7",
 			"revisionTime": "2016-02-17T20:03:01+11:00"
 		}
-	]
+	],
+	"rootPath": "github.com/wrouesnel/emailcli"
 }
