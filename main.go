@@ -9,6 +9,8 @@ import (
 	"net"
 	"net/smtp"
 	"io/ioutil"
+	"crypto/tls"
+	"crypto/x509"
 )
 
 var (
@@ -29,6 +31,9 @@ var (
 
 	timeout = kingpin.Flag("timeout", "Timeout for mail sending").Envar("EMAIL_TIMEOUT").Duration()
 	poolsize = kingpin.Flag("concurrent-sends", "Max concurrent email send jobs").Envar("EMAIL_CONCURRENT_SENDS").Default("1").Int()
+
+	sslInsecure = kingpin.Flag("insecure-skip-verify", "Disable TLS certificate authentication").Envar("EMAIL_INSECURE").Default("false").Bool()
+	sslCA = kingpin.Flag("cacert", "Specify a custom CA certificate to verify against").Envar("EMAIL_CACERT").String()
 )
 
 var Version = "0.0.0-dev"
@@ -55,12 +60,32 @@ func main() {
 	}
 
 	err:= func() error {
-		sendPool := email.NewPool(
+		tlsConf := new(tls.Config)
+		tlsConf.InsecureSkipVerify = *sslInsecure
+		if *sslCA != "" {
+			certs := x509.NewCertPool()
+
+			pemData, err := ioutil.ReadFile(*sslCA)
+			if err != nil {
+				println("Error loading custom root CA:", *sslCA)
+				return err
+			}
+			certs.AppendCertsFromPEM(pemData)
+			tlsConf.RootCAs = certs
+		}
+
+
+		sendPool, perr := email.NewPool(
 			net.JoinHostPort(*host, fmt.Sprintf("%v", *port)),
 			*poolsize,
 			smtp.PlainAuth("", *username, *password, *host),
+			tlsConf,
 		)
-		defer sendPool.Close()
+		if perr != nil {
+			println("Error creating email pool:", perr.Error())
+			return perr
+		}
+		//defer sendPool.Close()
 
 		for _, recipient := range *to {
 			m := email.NewEmail()
