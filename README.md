@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/wrouesnel/emailcli.svg?branch=master)](https://travis-ci.org/wrouesnel/emailcli)
+[![Go Report Card](https://goreportcard.com/badge/github.com/wrouesnel/emailcli)](https://goreportcard.com/report/github.com/wrouesnel/emailcli)
+
 # Emailcli
 
 Because surprisingly, everything else out there just barely fails to
