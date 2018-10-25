@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jordan-wright/email"
-	"gopkg.in/alecthomas/kingpin.v2"
-	"net"
-	"net/smtp"
-	"io/ioutil"
 	"crypto/tls"
 	"crypto/x509"
+	"github.com/jordan-wright/email"
+	"gopkg.in/alecthomas/kingpin.v2"
+	"io/ioutil"
+	"net"
+	"net/smtp"
 )
 
 var (
@@ -18,22 +18,24 @@ var (
 	password = kingpin.Flag("password", "Password to authenticate to the SMTP server with").Envar("EMAIL_PASSWORD").String()
 
 	//usetls = kingpin.Flag("use-tls", "Use TLS to authenticate").Envar("EMAIL_USETLS").Bool()
-	host =kingpin.Flag("host", "Hostname").Envar("EMAIL_HOST").String()
+	host = kingpin.Flag("host", "Hostname").Envar("EMAIL_HOST").String()
 	port = kingpin.Flag("port", "Port number").Envar("EMAIL_PORT").Default("25").Uint16()
+
+	tlsHost = kingpin.Flag("tls-host", "Hostname to use for verifying TLS (default to host if blank)").Envar("EMAIL_TLSHOST").String()
 
 	attachments = kingpin.Flag("attach", "Files to attach to the email.").Envar("EMAIL_ATTACH").ExistingFiles()
 
 	subject = kingpin.Flag("subject", "Subject line of email.").Envar("EMAIL_SUBJECT").String()
-	body = kingpin.Flag("body", "Body of email. Read from stdin if blank.").Envar("EMAIL_BODY").String()
+	body    = kingpin.Flag("body", "Body of email. Read from stdin if blank.").Envar("EMAIL_BODY").String()
 
 	from = kingpin.Flag("from", "From address for email").Envar("EMAIL_FROM").String()
-	to = kingpin.Arg("to", "Email recipients").Strings()
+	to   = kingpin.Arg("to", "Email recipients").Strings()
 
-	timeout = kingpin.Flag("timeout", "Timeout for mail sending").Envar("EMAIL_TIMEOUT").Duration()
+	timeout  = kingpin.Flag("timeout", "Timeout for mail sending").Envar("EMAIL_TIMEOUT").Duration()
 	poolsize = kingpin.Flag("concurrent-sends", "Max concurrent email send jobs").Envar("EMAIL_CONCURRENT_SENDS").Default("1").Int()
 
 	sslInsecure = kingpin.Flag("insecure-skip-verify", "Disable TLS certificate authentication").Envar("EMAIL_INSECURE").Default("false").Bool()
-	sslCA = kingpin.Flag("cacert", "Specify a custom CA certificate to verify against").Envar("EMAIL_CACERT").String()
+	sslCA       = kingpin.Flag("cacert", "Specify a custom CA certificate to verify against").Envar("EMAIL_CACERT").String()
 )
 
 var Version = "0.0.0-dev"
@@ -59,10 +61,15 @@ func main() {
 		bodytxt = []byte(*body)
 	}
 
-	err:= func() error {
+	err := func() error {
 		tlsConf := new(tls.Config)
+		if *tlsHost != "" {
+			tlsConf.ServerName = *tlsHost
+		} else {
+			tlsConf.ServerName = *host
+		}
 		tlsConf.InsecureSkipVerify = *sslInsecure
-		fmt.Println(*sslInsecure)
+
 		if *sslCA != "" {
 			certs := x509.NewCertPool()
 
@@ -74,7 +81,6 @@ func main() {
 			certs.AppendCertsFromPEM(pemData)
 			tlsConf.RootCAs = certs
 		}
-
 
 		sendPool, perr := email.NewPool(
 			net.JoinHostPort(*host, fmt.Sprintf("%v", *port)),
@@ -111,7 +117,7 @@ func main() {
 	}()
 
 	if err != nil {
-	    println("Error sending mail:", err.Error())
+		println("Error sending mail:", err.Error())
 		os.Exit(1)
 	}
 	os.Exit(0)
