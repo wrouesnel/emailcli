@@ -62,6 +62,7 @@ func main() {
 	err:= func() error {
 		tlsConf := new(tls.Config)
 		tlsConf.InsecureSkipVerify = *sslInsecure
+		fmt.Println(*sslInsecure)
 		if *sslCA != "" {
 			certs := x509.NewCertPool()
 
@@ -110,6 +111,7 @@ func main() {
 	}()
 
 	if err != nil {
+	    println("Error sending mail:", err.Error())
 		os.Exit(1)
 	}
 	os.Exit(0)
