@@ -14,7 +14,13 @@ command line interface.
 
 ## Install
 
-    go get github.com/wrouesnel/emailcli
+Download a release binary from the [releases](https://github.com/wrouesnel/emailcli/releases/latest) page or use the container packaging:
+    
+    podman run -it --rm ghcr.io/wrouesnel/emailcli:latest
+
+OR
+
+    docker run -it --rm ghcr.io/wrouesnel/emailcli:latest
 
 ## Usage
 
