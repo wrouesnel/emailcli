@@ -1,5 +1,8 @@
-[![Build Status](https://travis-ci.org/wrouesnel/emailcli.svg?branch=master)](https://travis-ci.org/wrouesnel/emailcli)
-[![Go Report Card](https://goreportcard.com/badge/github.com/wrouesnel/emailcli)](https://goreportcard.com/report/github.com/wrouesnel/emailcli)
+[![Build and Test](https://github.com/wrouesnel/emailcli/actions/workflows/integration.yml/badge.svg)](https://github.com/wrouesnel/emailcli/actions/workflows/integration.yml)
+[![Release](https://github.com/wrouesnel/emailcli/actions/workflows/release.yml/badge.svg)](https://github.com/wrouesnel/emailcli/actions/workflows/release.yml)
+[![Container Build](https://github.com/wrouesnel/emailcli/actions/workflows/container.yml/badge.svg)](https://github.com/wrouesnel/emailcli/actions/workflows/container.yml)
+[![Coverage Status](https://coveralls.io/repos/github/wrouesnel/emailcli/badge.svg?branch=main)](https://coveralls.io/github/wrouesnel/emailcli?branch=main)
+
 
 # Emailcli
 

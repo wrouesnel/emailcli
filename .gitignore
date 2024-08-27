@@ -1,2 +1,12 @@
 /email
-/.idea
+.idea
+node_modules
+/bin
+/.bin
+/.coverage
+/release
+/.cover.out
+/test-configs
+/.junit
+/image.iid
+/..bfg-report
